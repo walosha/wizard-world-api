@@ -11,6 +11,12 @@ datasource db {
 }
 
 
+enum Difficulty {
+    EASY
+    MEDIUM
+    HARD
+}
+
 model Wizard {  
     id     String   @id @default(auto ()) @map("_id") @db.ObjectId
     firstname  String   
@@ -18,17 +24,26 @@ model Wizard {
     description  String  
     spells Spell[]
 
+
+    @@index([firstname,lastname])
+
 }
 
 model Spell {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  difficulty  String
   Wizard   Wizard   @relation(fields: [wizardId], references: [id])
   wizardId String @db.ObjectId 
+
+
+  @@index([name])
 }
 
 model Elixer {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
   name  String
+  difficulty  Difficulty   @default(EASY)
+
+
+  @@index([name,difficulty])
 }

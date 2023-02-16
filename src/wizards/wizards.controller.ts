@@ -18,8 +18,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { WizardDto } from './dto';
 import { HttpRestApiModelWizard, HttpRestApiResponseWizard } from './doc';
+import { Prisma } from '@prisma/client';
 
 @ApiTags('wizard')
 @Controller('wizards')
@@ -58,8 +58,8 @@ export class WizardsController {
   @ApiOperation({ summary: 'Create wizard' })
   @ApiBody({ type: HttpRestApiModelWizard })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
-  async create(@Body() oCreateWizardDto: WizardDto) {
-    const wizard = await this.wizardsService.create(oCreateWizardDto);
+  async create(@Body() createWizardDto: Prisma.WizardCreateInput) {
+    const wizard = await this.wizardsService.create(createWizardDto);
     return { data: wizard, message: 'Wizrds successfully created' };
   }
 
@@ -67,7 +67,10 @@ export class WizardsController {
   @ApiOperation({ summary: 'update a  wizard' })
   @ApiBody({ type: HttpRestApiModelWizard })
   @ApiResponse({ status: HttpStatus.OK, type: HttpRestApiResponseWizard })
-  update(@Param('id') id: string, @Body() updateWizardDto: any) {
+  update(
+    @Param('id') id: string,
+    @Body() updateWizardDto: Prisma.WizardUpdateInput,
+  ) {
     return this.wizardsService.update(id, updateWizardDto);
   }
 

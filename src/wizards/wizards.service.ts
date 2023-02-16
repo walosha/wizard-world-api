@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { WizardDto } from './dto';
 import { createPaginator } from 'prisma/prisma.pagination';
 import { Prisma, Wizard } from '@prisma/client';
 
@@ -9,7 +8,7 @@ const paginate = createPaginator({ perPage: 20 });
 @Injectable()
 export class WizardsService {
   constructor(private prisma: PrismaService) {}
-  async create(createWizardDto: WizardDto) {
+  async create(createWizardDto: Prisma.WizardCreateInput) {
     return await this.prisma.wizard.create({ data: createWizardDto });
   }
 
@@ -49,7 +48,7 @@ export class WizardsService {
     });
   }
 
-  async update(id: string, updateWizardDto: any) {
+  async update(id: string, updateWizardDto: Prisma.WizardUpdateInput) {
     return await this.prisma.wizard.update({
       where: { id },
       data: updateWizardDto,
