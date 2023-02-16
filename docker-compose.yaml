@@ -1,26 +1,29 @@
 version: '3.9'
 
 services:
-  node_app:
-    container_name: node_app
-    build: .
-    image: walosha/wizardworld-api
-    ports:
-      - '3000:3000'
-    env_file:
-      - ./.env
-    depends_on:
-      - node_db
+  # node_app:
+  #   container_name: node_app
+  #   build: .
+  #   image: walosha/wizardworld-api
+  #   ports:
+  #     - '3000:3000'
+  #   env_file:
+  #     - ./.env
+  #   depends_on:
+  #     - node_db
 
   node_db:
     container_name: mongo
-    image: mongo
+    image: 'bitnami/mongodb:latest'
     restart: always
     ports:
       - '27017:27017'
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
+      - MONGODB_ADVERTISED_HOSTNAME=127.0.0.1
+      - MONGODB_REPLICA_SET_MODE=primary
+      - MONGODB_ROOT_USER=anyuser
+      - MONGODB_ROOT_PASSWORD=anypassword
+      - MONGODB_REPLICA_SET_KEY=replicasetkey123
     volumes:
       - node_db_data:/data/db
 
