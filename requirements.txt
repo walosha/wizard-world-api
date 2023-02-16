@@ -1,0 +1,16 @@
+Objectives
+ 
+Create the WizardWorldApi specifically the endpoints for Elixirs, Spells and Wizards.
+For Wizards 
+create, 
+get, 
+update, 
+delete 
+search by either their first or last name or both 
+Paginate your data
+
+For Elixirs, CRUD implementation and also ensure the results can be searched based on the difficulty, and name.
+For Spells,  CRUD implementation and also ensure the results can be searched based on the name 
+Add a feature to make it possible for a Spell to be assigned to a Wizard, which shows up on that Wizard details
+Document the endpoints using swagger. 
+Put your code into a repo with a README.md file stating how to run your app

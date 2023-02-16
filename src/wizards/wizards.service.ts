@@ -1,21 +1,51 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CreateWizardDto } from './dto/createWizardDto';
+import { WizardDto } from './dto';
+import { createPaginator } from 'prisma/prisma.pagination';
+import { Prisma, Wizard } from '@prisma/client';
+
+const paginate = createPaginator({ perPage: 20 });
 
 @Injectable()
 export class WizardsService {
   constructor(private prisma: PrismaService) {}
-  async create(createWizardDto: CreateWizardDto) {
+  async create(createWizardDto: WizardDto) {
     return await this.prisma.wizard.create({ data: createWizardDto });
   }
 
-  async findAll() {
-    return await this.prisma.wizard.findMany();
+  async findAll({ page, search = '' }) {
+    return await paginate<Wizard, Prisma.WizardFindManyArgs>(
+      this.prisma.wizard,
+      {
+        orderBy: {
+          id: 'desc',
+        },
+        where: {
+          OR: [
+            {
+              firstname: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+            {
+              lastname: {
+                contains: search,
+                mode: 'insensitive',
+              },
+            },
+          ],
+        },
+      },
+
+      { page },
+    );
   }
 
   async findOne(id: string) {
     return await this.prisma.wizard.findUnique({
       where: { id },
+      include: { spells: true },
     });
   }
 

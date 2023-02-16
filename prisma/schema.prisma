@@ -13,7 +13,8 @@ datasource db {
 
 model Wizard {  
     id     String   @id @default(auto ()) @map("_id") @db.ObjectId
-    name  String   @unique  
+    firstname  String   
+    lastname  String   
     description  String  
     spells Spell[]
 
@@ -21,6 +22,13 @@ model Wizard {
 
 model Spell {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  difficulty  String
   Wizard   Wizard   @relation(fields: [wizardId], references: [id])
   wizardId String @db.ObjectId 
+}
+
+model Elixer {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
 }
