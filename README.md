@@ -1,73 +1,72 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="250" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1>World Wizard API</h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Tools used
 
-## Description
+- Nestjs
+- Prisma
+- Mongodb
+- Swagger
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Testing
 
-## Installation
+- We want testable softwares. Most parts of the software in the previous version 1.x were covered by test.
+- To run Feature and Unit Tests run following commands:
 
-```bash
-$ npm install
-```
+  ```sh
+  $ npm run test
+  ```
 
-## Running the app
+## Whats New
 
-```bash
-# development
-$ npm run start
+v2.X is built from scratch. Both UI and internal workflow of the application are changed to a better design.
 
-# watch mode
-$ npm run start:dev
+## Features yet to be migrated from v1.X to v2.X
 
-# production mode
-$ npm run start:prod
-```
+Following features that exist in v1.X
 
-## Test
+- Create the WizardWorldApi specifically the endpoints for Elixirs, Spells and Wizards.
+  For Wizards
+  create,
+  get,
+  update,
+  delete
+  search by either their first or last name or both
+  Paginate your data
 
-```bash
-# unit tests
-$ npm run test
+- Elixirs, CRUD implementation and also ensure the results can be searched based on the difficulty, and name.
+- Spells, CRUD implementation and also ensure the results can be searched based on the name
+- a feature to make it possible for a Spell to be assigned to a Wizard, which shows up on that Wizard details
+- Document the endpoints using swagger.
+- your code into a repo with a README.md file stating how to run your app
 
-# e2e tests
-$ npm run test:e2e
+## How to Start
 
-# test coverage
-$ npm run test:cov
-```
+### Using Docker Container:
 
-## Support
+**[Docker](https://www.docker.com/)** is now supported and improved.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+[How To Set Up Laravel, Nginx, and MySQL With Docker Compose on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-on-ubuntu-20-04)
 
-## Stay in touch
+With the improved Docker setup, you will get:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- nodejs
+- mongodb
 
-## License
+### Steps to install:
 
-Nest is [MIT licensed](LICENSE).
+1. Clone or donwload the repository.
+2. Create **purify** folder in `storage/app/` directory.
+3. Run `cp .env.sample .env`.
+4. Run `docker-compose up -d`.
+5. Run `docker exec -it node_db sh`. Inside the shell, run:
+
+6. Finally, exit the container by running `exit` in the container shell.
+7. Run `docker exec -it app sh`. Inside the shell, run following commands:
+
+   Then exit from the container.
+
+8. Visit **http://localhost:3000/api#**. Access the swagger documentation:
