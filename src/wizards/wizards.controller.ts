@@ -18,7 +18,11 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { HttpRestApiModelWizard, HttpRestApiResponseWizard } from './doc';
+import {
+  HttpRestApiModelWizard,
+  HttpRestApiModelWizardSpells,
+  HttpRestApiResponseWizard,
+} from './doc';
 import { Prisma } from '@prisma/client';
 
 @ApiTags('wizard')
@@ -63,6 +67,28 @@ export class WizardsController {
     return { data: wizard, message: 'Wizrds successfully created' };
   }
 
+  @Post(':id/spell/:spellId')
+  @ApiOperation({ summary: 'Add spell to  wizard' })
+  @ApiParam({
+    name: 'id',
+    required: true,
+    description: 'Should be an id of a wizard that exists in the database',
+  })
+  @ApiBody({ type: HttpRestApiModelWizardSpells })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
+  async addSpellToWizard(
+    @Param('id') id: string,
+    @Body() addSpellsToWizardDto: Prisma.SpellCreateManyWizardInput,
+  ) {
+    console.log({ id, addSpellsToWizardDto });
+
+    const wizard = await this.wizardsService.addSpellsToWizard(
+      id,
+      addSpellsToWizardDto,
+    );
+    return { data: wizard, message: 'Spell  successfully added to wizard' };
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'update a  wizard' })
   @ApiBody({ type: HttpRestApiModelWizard })
@@ -81,3 +107,6 @@ export class WizardsController {
     return await this.wizardsService.remove(id);
   }
 }
+
+// @Controller('brands/:brandId/addons')
+// export class BrandAddonsController {

@@ -16,3 +16,8 @@ export class HttpRestApiResponseWizard extends HttpRestApiResponse {
   @ApiProperty({ type: HttpRestApiModelWizard })
   public data: HttpRestApiModelWizard;
 }
+
+export class HttpRestApiModelWizardSpells {
+  @ApiProperty({ type: 'array', items: { type: 'string' } })
+  public spells: string[];
+}

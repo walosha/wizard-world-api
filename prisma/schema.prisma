@@ -35,7 +35,6 @@ model Spell {
   Wizard   Wizard   @relation(fields: [wizardId], references: [id])
   wizardId String @db.ObjectId 
 
-
   @@index([name])
 }
 

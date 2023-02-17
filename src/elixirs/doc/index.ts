@@ -6,7 +6,7 @@ export class HttpRestApiModelElixir {
   @ApiProperty({ type: 'string' })
   public name: string;
 
-  @ApiProperty({ type: 'string' })
+  @ApiProperty({ type: 'string', example: 'EASY' })
   public difficulty: Difficulty;
 }
 

@@ -8,8 +8,25 @@ const paginate = createPaginator({ perPage: 20 });
 @Injectable()
 export class WizardsService {
   constructor(private prisma: PrismaService) {}
+
   async create(createWizardDto: Prisma.WizardCreateInput) {
     return await this.prisma.wizard.create({ data: createWizardDto });
+  }
+
+  async addSpellsToWizard(
+    id,
+    createWizardDto: Prisma.SpellCreateManyWizardInput,
+  ) {
+    return await this.prisma.wizard.update({
+      where: id,
+      data: {
+        spells: {
+          createMany: {
+            data: createWizardDto,
+          },
+        },
+      },
+    });
   }
 
   async findAll({ page, search = '' }) {
@@ -34,6 +51,9 @@ export class WizardsService {
               },
             },
           ],
+        },
+        include: {
+          spells: true,
         },
       },
 

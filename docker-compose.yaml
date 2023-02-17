@@ -18,12 +18,8 @@ services:
     restart: always
     ports:
       - '27017:27017'
-    environment:
-      - MONGODB_ADVERTISED_HOSTNAME=127.0.0.1
-      - MONGODB_REPLICA_SET_MODE=primary
-      - MONGODB_ROOT_USER=anyuser
-      - MONGODB_ROOT_PASSWORD=anypassword
-      - MONGODB_REPLICA_SET_KEY=replicasetkey123
+    env_file:
+      - ./.env
     volumes:
       - node_db_data:/data/db
 
