@@ -20,13 +20,7 @@
   $ npm run test
   ```
 
-## Whats New
-
-v2.X is built from scratch. Both UI and internal workflow of the application are changed to a better design.
-
-## Features yet to be migrated from v1.X to v2.X
-
-Following features that exist in v1.X
+## Features
 
 - Create the WizardWorldApi specifically the endpoints for Elixirs, Spells and Wizards.
   For Wizards
@@ -59,14 +53,6 @@ With the improved Docker setup, you will get:
 ### Steps to install:
 
 1. Clone or donwload the repository.
-2. Create **purify** folder in `storage/app/` directory.
-3. Run `cp .env.sample .env`.
-4. Run `docker-compose up -d`.
-5. Run `docker exec -it node_db sh`. Inside the shell, run:
-
-6. Finally, exit the container by running `exit` in the container shell.
-7. Run `docker exec -it app sh`. Inside the shell, run following commands:
-
-   Then exit from the container.
-
-8. Visit **http://localhost:3000/api#**. Access the swagger documentation:
+2. Run `cp .env.sample .env`.
+3. Run `docker-compose up -d`.
+4. Visit **http://localhost:3000/api#**. Access the swagger documentation:

@@ -8,6 +8,7 @@ import {
   Delete,
   HttpStatus,
   Query,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { WizardsService } from './wizards.service';
 import {
@@ -24,6 +25,7 @@ import {
   HttpRestApiResponseWizard,
 } from './doc';
 import { Prisma } from '@prisma/client';
+import { CreateWizardDto, UpdateWizardDto, WizardIdDto } from './dto';
 
 @ApiTags('wizard')
 @Controller('wizards')
@@ -53,16 +55,14 @@ export class WizardsController {
     required: true,
     description: 'Should be an id of a wizard that exists in the database',
   })
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string) {
     const wizard = await this.wizardsService.findOne(id);
     return { data: wizard, message: 'A wizard successfully sent' };
   }
 
   @Post()
   @ApiOperation({ summary: 'Create wizard' })
-  @ApiBody({ type: HttpRestApiModelWizard })
-  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
-  async create(@Body() createWizardDto: Prisma.WizardCreateInput) {
+  async create(@Body() createWizardDto: CreateWizardDto) {
     const wizard = await this.wizardsService.create(createWizardDto);
     return { data: wizard, message: 'Wizrds successfully created' };
   }
@@ -80,8 +80,6 @@ export class WizardsController {
     @Param('id') id: string,
     @Body() addSpellsToWizardDto: Prisma.SpellCreateManyWizardInput,
   ) {
-    console.log({ id, addSpellsToWizardDto });
-
     const wizard = await this.wizardsService.addSpellsToWizard(
       id,
       addSpellsToWizardDto,
@@ -93,10 +91,7 @@ export class WizardsController {
   @ApiOperation({ summary: 'update a  wizard' })
   @ApiBody({ type: HttpRestApiModelWizard })
   @ApiResponse({ status: HttpStatus.OK, type: HttpRestApiResponseWizard })
-  update(
-    @Param('id') id: string,
-    @Body() updateWizardDto: Prisma.WizardUpdateInput,
-  ) {
+  update(@Param('id') id: string, @Body() updateWizardDto: UpdateWizardDto) {
     return this.wizardsService.update(id, updateWizardDto);
   }
 
@@ -107,6 +102,3 @@ export class WizardsController {
     return await this.wizardsService.remove(id);
   }
 }
-
-// @Controller('brands/:brandId/addons')
-// export class BrandAddonsController {

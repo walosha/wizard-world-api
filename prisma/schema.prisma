@@ -5,11 +5,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator joi {
+  provider = "prisma-joi-generator"
+}
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
-
 
 enum Difficulty {
     EASY
@@ -18,13 +20,11 @@ enum Difficulty {
 }
 
 model Wizard {  
-    id     String   @id @default(auto ()) @map("_id") @db.ObjectId
+    id String   @id @default(auto ()) @map("_id") @db.ObjectId
     firstname  String   
-    lastname  String   
+    lastname  String 
     description  String  
     spells Spell[]
-
-
     @@index([firstname,lastname])
 
 }

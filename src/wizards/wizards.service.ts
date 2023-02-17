@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { createPaginator } from 'prisma/prisma.pagination';
 import { Prisma, Wizard } from '@prisma/client';
+import { WizardIdDto } from './dto';
 
 const paginate = createPaginator({ perPage: 20 });
 
