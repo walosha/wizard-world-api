@@ -25,7 +25,7 @@ import {
   HttpRestApiResponseWizard,
 } from './doc';
 import { Prisma } from '@prisma/client';
-import { CreateWizardDto, UpdateWizardDto, WizardIdDto } from './dto';
+import { CreateWizardDto, UpdateWizardDto } from './dto';
 
 @ApiTags('wizard')
 @Controller('wizards')
@@ -78,7 +78,7 @@ export class WizardsController {
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
   async addSpellToWizard(
     @Param('id') id: string,
-    @Body() addSpellsToWizardDto: Prisma.SpellCreateManyWizardInput,
+    @Body() addSpellsToWizardDto: Prisma.SpellCreateManyInput,
   ) {
     const wizard = await this.wizardsService.addSpellsToWizard(
       id,

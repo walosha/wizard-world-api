@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { createPaginator } from 'prisma/prisma.pagination';
 import { Prisma, Wizard } from '@prisma/client';
-import { WizardIdDto } from './dto';
 
 const paginate = createPaginator({ perPage: 20 });
 
@@ -14,19 +13,12 @@ export class WizardsService {
     return await this.prisma.wizard.create({ data: createWizardDto });
   }
 
-  async addSpellsToWizard(
-    id,
-    createWizardDto: Prisma.SpellCreateManyWizardInput,
-  ) {
-    return await this.prisma.wizard.update({
-      where: id,
-      data: {
-        spells: {
-          createMany: {
-            data: createWizardDto,
-          },
-        },
+  async addSpellsToWizard(id, createWizardDto) {
+    return await this.prisma.wizard.updateMany({
+      where: {
+        id,
       },
+      data: { spellsIDs: createWizardDto.spells },
     });
   }
 
@@ -52,9 +44,6 @@ export class WizardsService {
               },
             },
           ],
-        },
-        include: {
-          spells: true,
         },
       },
 
