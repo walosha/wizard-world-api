@@ -24,7 +24,6 @@ export const createPaginator = (
   return async (model, args: any = { where: undefined }, options) => {
     const page = Number(options?.page || defaultOptions?.page) || 1;
     const perPage = Number(options?.perPage || defaultOptions?.perPage) || 10;
-
     const skip = page > 0 ? perPage * (page - 1) : 0;
     const [total, data] = await Promise.all([
       model.count({ where: args.where }),

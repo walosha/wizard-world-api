@@ -45,6 +45,15 @@ export class WizardsService {
             },
           ],
         },
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          description: true,
+          spells: {
+            select: { id: true, name: true },
+          },
+        },
       },
 
       { page },
@@ -54,7 +63,15 @@ export class WizardsService {
   async findOne(id: string) {
     return await this.prisma.wizard.findUnique({
       where: { id },
-      include: { spells: true },
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        description: true,
+        spells: {
+          select: { id: true, name: true },
+        },
+      },
     });
   }
 

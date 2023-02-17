@@ -55,7 +55,7 @@ export class WizardsController {
     required: true,
     description: 'Should be an id of a wizard that exists in the database',
   })
-  async findOne(@Param('id', ParseUUIDPipe) id: string) {
+  async findOne(@Param('id') id: string) {
     const wizard = await this.wizardsService.findOne(id);
     return { data: wizard, message: 'A wizard successfully sent' };
   }

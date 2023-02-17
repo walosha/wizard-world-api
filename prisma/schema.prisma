@@ -36,8 +36,7 @@ model Spell {
   name  String
 
   wizardIDs String[] @db.ObjectId
-  posts   Wizard[]   @relation(fields: [wizardIDs], references: [id])
-
+  wizard   Wizard[]   @relation(fields: [wizardIDs], references: [id])
   @@index([name])
 }
 
