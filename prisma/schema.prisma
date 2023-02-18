@@ -2,50 +2,47 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // binaryTargets = ["native", "linux-musl"]
+  binaryTargets = ["native", "linux-musl", "linux-arm-openssl-1.1.x"]
 }
-
-
 
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
-
-
 enum Difficulty {
-    EASY
-    MEDIUM
-    HARD
+  EASY
+  MEDIUM
+  HARD
 }
 
-model Wizard {  
-    id String   @id @default(auto ()) @map("_id") @db.ObjectId
-    firstname  String   
-    lastname  String 
-    description  String  
-    spellsIDs String[]   @db.ObjectId
-    spells  Spell[] @relation(fields: [spellsIDs], references: [id])
-    @@index([firstname,lastname])
+model Wizard {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstname   String
+  lastname    String
+  description String
+  spellsIDs   String[] @db.ObjectId
+  spells      Spell[]  @relation(fields: [spellsIDs], references: [id])
 
+  @@index([firstname, lastname])
 }
 
 model Spell {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
 
   wizardIDs String[] @db.ObjectId
-  wizard   Wizard[]   @relation(fields: [wizardIDs], references: [id])
+  wizard    Wizard[] @relation(fields: [wizardIDs], references: [id])
+
   @@index([name])
 }
 
 model Elixer {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  name  String
-  difficulty  Difficulty   @default(EASY)
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  difficulty Difficulty @default(EASY)
 
-
-  @@index([name,difficulty])
+  @@index([name, difficulty])
 }
-

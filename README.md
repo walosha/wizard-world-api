@@ -39,20 +39,23 @@
 
 ## How to Start
 
+### Without Using Docker:
+
+1. Clone or donwload the repository.
+2. Run `cp .env.sample .env`.
+3. Enter the env variables
+4. Add value to the `DATABASE_URL` (Mongodb)
+5. Run `npm run dev` to stat nestjs app and run prisma generate
+
 ### Using Docker Container:
 
-**[Docker](https://www.docker.com/)** is now supported and improved.
-
-[How To Set Up Laravel, Nginx, and MySQL With Docker Compose on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-laravel-nginx-and-mysql-with-docker-compose-on-ubuntu-20-04)
-
-With the improved Docker setup, you will get:
-
-- nodejs
-- mongodb
+[there is an issue with prisma running a node docker image associated with some operating systems, click the link to get more insight !!! ](https://github.com/prisma/prisma/issues/7631)
 
 ### Steps to install:
 
 1. Clone or donwload the repository.
 2. Run `cp .env.sample .env`.
-3. Run `docker-compose up -d`.
-4. Visit **http://localhost:3000/api#**. Access the swagger documentation:
+3. Enter the env variables
+4. Run `docker-compose up --build`.
+5. Run `npm run dev` to stat nestjs app and run prisma generate
+6. Visit **http://localhost:3000/api#**. Access the swagger documentation:
