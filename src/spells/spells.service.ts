@@ -9,7 +9,13 @@ export class SpellsService {
   constructor(private prisma: PrismaService) {}
 
   async create(createSpellDto: Prisma.SpellCreateInput) {
-    return await this.prisma.spell.create({ data: createSpellDto });
+    return await this.prisma.spell.create({
+      data: createSpellDto,
+      select: {
+        id: true,
+        name: true,
+      },
+    });
   }
 
   async findAll({ page = 1, name = '' }: { page: number; name: string }) {
@@ -18,6 +24,10 @@ export class SpellsService {
       {
         orderBy: {
           id: 'desc',
+        },
+        select: {
+          id: true,
+          name: true,
         },
         where: {
           OR: [
@@ -38,6 +48,10 @@ export class SpellsService {
   async findOne(id: string) {
     return await this.prisma.spell.findUnique({
       where: { id },
+      select: {
+        id: true,
+        name: true,
+      },
     });
   }
 
@@ -45,6 +59,10 @@ export class SpellsService {
     return await this.prisma.spell.update({
       where: { id },
       data: updateSpellDto,
+      select: {
+        id: true,
+        name: true,
+      },
     });
   }
 

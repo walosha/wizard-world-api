@@ -21,6 +21,7 @@ import {
 import { Difficulty } from './types';
 import { HttpRestApiModelElixir, HttpRestApiResponseElixir } from './doc';
 import { Prisma } from '@prisma/client';
+import { ElixirDto } from './dto';
 
 @ApiTags('elixir')
 @Controller('elixirs')
@@ -73,7 +74,7 @@ export class ElixirsController {
   @ApiOperation({ summary: 'Create Elixir' })
   @ApiBody({ type: HttpRestApiModelElixir })
   @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden.' })
-  async create(@Body() createElixirDto: Prisma.ElixerCreateInput) {
+  async create(@Body() createElixirDto: ElixirDto) {
     const elixir = await this.elixirsService.create(createElixirDto);
     return { data: elixir, message: 'Elixir successfully created' };
   }

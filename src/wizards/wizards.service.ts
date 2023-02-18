@@ -13,19 +13,12 @@ export class WizardsService {
     return await this.prisma.wizard.create({ data: createWizardDto });
   }
 
-  async addSpellsToWizard(
-    id,
-    createWizardDto: Prisma.SpellCreateManyWizardInput,
-  ) {
-    return await this.prisma.wizard.update({
-      where: id,
-      data: {
-        spells: {
-          createMany: {
-            data: createWizardDto,
-          },
-        },
+  async addSpellsToWizard(id, createWizardDto) {
+    return await this.prisma.wizard.updateMany({
+      where: {
+        id,
       },
+      data: { spellsIDs: createWizardDto.spells },
     });
   }
 
@@ -52,8 +45,14 @@ export class WizardsService {
             },
           ],
         },
-        include: {
-          spells: true,
+        select: {
+          id: true,
+          firstname: true,
+          lastname: true,
+          description: true,
+          spells: {
+            select: { id: true, name: true },
+          },
         },
       },
 
@@ -64,7 +63,15 @@ export class WizardsService {
   async findOne(id: string) {
     return await this.prisma.wizard.findUnique({
       where: { id },
-      include: { spells: true },
+      select: {
+        id: true,
+        firstname: true,
+        lastname: true,
+        description: true,
+        spells: {
+          select: { id: true, name: true },
+        },
+      },
     });
   }
 

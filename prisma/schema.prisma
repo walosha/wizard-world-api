@@ -5,10 +5,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
+
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
 
 
 enum Difficulty {
@@ -18,13 +21,12 @@ enum Difficulty {
 }
 
 model Wizard {  
-    id     String   @id @default(auto ()) @map("_id") @db.ObjectId
+    id String   @id @default(auto ()) @map("_id") @db.ObjectId
     firstname  String   
-    lastname  String   
+    lastname  String 
     description  String  
-    spells Spell[]
-
-
+    spellsIDs String[]   @db.ObjectId
+    spells  Spell[] @relation(fields: [spellsIDs], references: [id])
     @@index([firstname,lastname])
 
 }
@@ -32,9 +34,9 @@ model Wizard {
 model Spell {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name  String
-  Wizard   Wizard   @relation(fields: [wizardId], references: [id])
-  wizardId String @db.ObjectId 
 
+  wizardIDs String[] @db.ObjectId
+  wizard   Wizard[]   @relation(fields: [wizardIDs], references: [id])
   @@index([name])
 }
 
@@ -46,3 +48,4 @@ model Elixer {
 
   @@index([name,difficulty])
 }
+
