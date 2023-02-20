@@ -11,15 +11,6 @@
 - Mongodb
 - Swagger
 
-## Testing
-
-- We want testable softwares. Most parts of the software in the previous version 1.x were covered by test.
-- To run Feature and Unit Tests run following commands:
-
-  ```sh
-  $ npm run test
-  ```
-
 ## Features
 
 - Create the WizardWorldApi specifically the endpoints for Elixirs, Spells and Wizards.
@@ -39,6 +30,17 @@
 
 ## How to Start
 
+### Using Docker Container:
+
+### Steps to install:
+
+1. Install docker and docker compose
+2. Clone or donwload the repository.
+3. Run `cp .env.sample .env`.
+4. Enter the env variables
+5. Run `docker-compose up --build`.
+6. Visit **http://localhost:3000/api#**. Access the swagger documentation:
+
 ### Without Using Docker:
 
 1. Clone or donwload the repository.
@@ -46,16 +48,3 @@
 3. Enter the env variables
 4. Add value to the `DATABASE_URL` (Mongodb)
 5. Run `npm run dev` to stat nestjs app and run prisma generate
-
-### Using Docker Container:
-
-[there is an issue with prisma running a node docker image associated with some operating systems, click the link to get more insight !!! ](https://github.com/prisma/prisma/issues/7631)
-
-### Steps to install:
-
-1. Clone or donwload the repository.
-2. Run `cp .env.sample .env`.
-3. Enter the env variables
-4. Run `docker-compose up --build`.
-5. Run `npm run dev` to stat nestjs app and run prisma generate
-6. Visit **http://localhost:3000/api#**. Access the swagger documentation:
