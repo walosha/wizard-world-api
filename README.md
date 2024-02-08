@@ -2,49 +2,38 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="250" alt="Nest Logo" /></a>
 </p>
 
-<h1>World Wizard API</h1>
+# World Wizard API
 
-## Tools used
+## Tools Used
 
-- Nestjs
+- NestJS
 - Prisma
-- Mongodb
+- MongoDB
 - Swagger
 
 ## Features
 
-- Create the WizardWorldApi specifically the endpoints for Elixirs, Spells and Wizards.
-  For Wizards
-  create,
-  get,
-  update,
-  delete
-  search by either their first or last name or both
-  Paginate your data
+- **Wizards**: CRUD operations for wizards, including creation, retrieval, updating, and deletion. Enables search by first name, last name, or both. Pagination supported.
+- **Elixirs**: CRUD implementation with search functionality based on difficulty and name.
+- **Spells**: CRUD implementation with search functionality based on name. Option to assign spells to wizards, visible in wizard details.
+- **Swagger Documentation**: Endpoints are documented using Swagger.
+- **Repository with README**: Codebase is hosted on a repository with a comprehensive README.md file detailing how to run the app.
 
-- Elixirs, CRUD implementation and also ensure the results can be searched based on the difficulty, and name.
-- Spells, CRUD implementation and also ensure the results can be searched based on the name
-- a feature to make it possible for a Spell to be assigned to a Wizard, which shows up on that Wizard details
-- Document the endpoints using swagger.
-- your code into a repo with a README.md file stating how to run your app
-
-## How to Start
+## Getting Started
 
 ### Using Docker Container:
 
-### Steps to install:
-
-1. Install docker and docker compose
-2. Clone or donwload the repository.
+1. Install Docker and Docker Compose.
+2. Clone or download the repository.
 3. Run `cp .env.sample .env`.
-4. Enter the env variables
+4. Enter the environment variables.
 5. Run `docker-compose up --build`.
-6. Visit **http://localhost:3000/api#**. Access the swagger documentation:
+6. Visit [http://localhost:3000/api#](http://localhost:3000/api#) to access the Swagger documentation.
 
 ### Without Using Docker:
 
-1. Clone or donwload the repository.
+1. Clone or download the repository.
 2. Run `cp .env.sample .env`.
-3. Enter the env variables
-4. Add value to the `DATABASE_URL` (Mongodb)
-5. Run `npm run dev` to stat nestjs app and run prisma generate
+3. Enter the environment variables.
+4. Add a value to the `DATABASE_URL` (MongoDB).
+5. Run `npm run dev` to start the NestJS app and generate Prisma.
